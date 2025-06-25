@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESG Data Explorer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        h1 { color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        tr:hover { background-color: #ddd; }
+    </style>
+</head>
+<body>
+    <h1>ESG Company Data & Metrics</h1>
+     <div style="margin-bottom: 20px;">
+        <form action="/" method="GET">
+            <label for="industry_filter">Filter by Industry:</label>
+            <select name="industry" id="industry_filter" onchange="this.form.submit()">
+                <option value="">All Industries</option> {# Option to show all data #}
+                {% for industry in unique_industries %}
+                <option value="{{ industry }}" {% if industry == selected_industry %}selected{% endif %}>
+                    {{ industry }}
+                </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Apply Filter</button> {# Manual submit button, though onchange handles it too #}
+        </form>
+    </div>
+
+    <h2>Raw Data and Calculated Metrics</h2>
+    <table>
+        <thead>
+            <tr>
+                {% for column in data.columns %}
+                <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in data.iterrows() %}
+            <tr>
+                {% for cell in row %}
+                <td>
+                    {% if cell is number %} 
+                        {{ '%.2f' % cell }}
+                    {% else %}
+                        {{ cell }} 
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Average Carbon Intensity by Industry</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Industry</th>
+                <th>Average Carbon Intensity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in avg_carbon_intensity.iterrows() %}
+            <tr>
+                <td>{{ row.industry }}</td>
+                <td>{{ '%.2f' % row.carbon_intensity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        <hr>
+    <h2>Average Waste Metrics by Industry</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Industry</th>
+                <th>Average Waste per Employee (tonnes/employee)</th>
+                <th>Average Waste per Dollar Revenue (tonnes/million USD)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in avg_waste_per_employee.iterrows() %}
+            <tr>
+                <td>{{ row.industry }}</td>
+                <td>{{ '%.2f' % row.waste_per_employee }}</td>
+                <td>{{ '%.2f' % avg_waste_per_dollar_revenue.loc[index, 'waste_per_dollar_revenue'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr>
+    <h2>Top 5 & Bottom 5 Companies by ESG Metric</h2>
+
+    <h3>Top 5 by Carbon Intensity (Lower is Better)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Industry</th>
+                <th>Carbon Intensity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in top_carbon_intensity.iterrows() %}
+            <tr>
+                <td>{{ row.company_name }}</td>
+                <td>{{ row.industry }}</td>
+                <td>{{ '%.2f' % row.carbon_intensity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Bottom 5 by Carbon Intensity (Higher is Worse)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Industry</th>
+                <th>Carbon Intensity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in bottom_carbon_intensity.iterrows() %}
+            <tr>
+                <td>{{ row.company_name }}</td>
+                <td>{{ row.industry }}</td>
+                <td>{{ '%.2f' % row.carbon_intensity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Top 5 by Renewable Energy Percentage (Higher is Better)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Industry</th>
+                <th>Renewable Energy %</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in top_renewable_energy.iterrows() %}
+            <tr>
+                <td>{{ row.company_name }}</td>
+                <td>{{ row.industry }}</td>
+                <td>{{ '%.2f' % row.renewable_energy_perc }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Bottom 5 by Renewable Energy Percentage (Lower is Worse)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Industry</th>
+                <th>Renewable Energy %</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in bottom_renewable_energy.iterrows() %}
+            <tr>
+                <td>{{ row.company_name }}</td>
+                <td>{{ row.industry }}</td>
+                <td>{{ '%.2f' % row.renewable_energy_perc }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Top 5 by Gender Diversity Score (Higher is Better)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Industry</th>
+                <th>Gender Diversity Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in top_gender_diversity.iterrows() %}
+            <tr>
+                <td>{{ row.company_name }}</td>
+                <td>{{ row.industry }}</td>
+                <td>{{ '%.2f' % row.gender_diversity_score }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Top 5 by Waste per Employee (Lower is Better)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Industry</th>
+                <th>Waste per Employee</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in top_waste_per_employee.iterrows() %}
+            <tr>
+                <td>{{ row.company_name }}</td>
+                <td>{{ row.industry }}</td>
+                <td>{{ '%.2f' % row.waste_per_employee }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {# If you also added bottom_waste_per_employee in app.py, add this block #}
+    {% if bottom_waste_per_employee is defined %}
+    <h3>Bottom 5 by Waste per Employee (Higher is Worse)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Industry</th>
+                <th>Waste per Employee</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in bottom_waste_per_employee.iterrows() %}
+            <tr>
+                <td>{{ row.company_name }}</td>
+                <td>{{ row.industry }}</td>
+                <td>{{ '%.2f' % row.waste_per_employee }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <h3>Top 5 by Waste per Dollar Revenue (Lower is Better)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Industry</th>
+                <th>Waste per Dollar Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in top_waste_per_dollar_revenue.iterrows() %}
+            <tr>
+                <td>{{ row.company_name }}</td>
+                <td>{{ row.industry }}</td>
+                <td>{{ '%.2f' % row.waste_per_dollar_revenue }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {# If you also added bottom_waste_per_dollar_revenue in app.py, add this block #}
+    {% if bottom_waste_per_dollar_revenue is defined %}
+    <h3>Bottom 5 by Waste per Dollar Revenue (Higher is Worse)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Industry</th>
+                <th>Waste per Dollar Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in bottom_waste_per_dollar_revenue.iterrows() %}
+            <tr>
+                <td>{{ row.company_name }}</td>
+                <td>{{ row.industry }}</td>
+                <td>{{ '%.2f' % row.waste_per_dollar_revenue }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <p>This data is prototyped for ESG analysis. For interactive dashboards, data would be exported and visualized in Tableau.</p>
+
+</body>
+</html>

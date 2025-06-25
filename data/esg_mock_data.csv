@@ -1,0 +1,51 @@
+company_id,company_name,industry,revenue_usd_millions_2023,total_employees_2023,carbon_emissions_tonnes_2023,water_withdrawal_m3_2023,gender_diversity_female_perc,board_independence_perc,employee_turnover_rate_perc,renewable_energy_perc,waste_generated_tonnes_2023,data_quality_flag
+C001,Tech Innovators Inc.,Technology,12500,50000,15000,200000,35.5,80,12.5,45,500,Good
+C002,Global Logistics Co.,Logistics,8900,35000,55000,150000,28.2,60,18.0,15,2500,Good
+C003,Green Energy Solutions,Energy,3200,12000,2000,50000,42.1,90,8.0,90,100,Good
+C004,Consumer Goods Brands,Consumer Staples,18000,75000,30000,300000,38.9,70,15.5,30,1800,Good
+C005,Healthcare Pioneers,Healthcare,6700,25000,8000,100000,45.0,85,9.2,60,300,Good
+C006,Financial Services Ltd.,Finance,9500,40000,5000,50000,32.7,75,11.0,25,80,Good
+C007,Heavy Industries Corp.,Industrials,15000,60000,75000,400000,25.1,50,22.1,10,5000,Poor - Incomplete Data
+C008,AgriFoods United,Agriculture,4500,20000,10000,250000,,65,16.8,20,1200,Good
+C009,Travel & Leisure Co.,Hospitality,2000,10000,7000,80000,40.5,80,25.0,35,400,Good
+C010,EduTech Global,Technology,NA,8000,1000,15000,50.0,95,10.0,80,50,Good
+C011,Automotive Innovations,Automotive,11000,45000,60000,350000,27.5,65,17.0,20,3000,Good
+C012,Retail Chain Stores,Retail,7000,30000,12000,180000,31.0,70,14.5,NA,900,Good
+C013,Pharma Research Inc.,Healthcare,5500,22000,3000,70000,48.0,92,7.5,70,150,Good
+C014,Construction Giants,Construction,13000,55000,80000,450000,22.0,55,20.0,5,6000,Good
+C015,Software Solutions Co.,Technology,6000,28000,2500,40000,40.0,88,9.8,75,80,Good
+C016,Mining Resources Ltd.,Mining,9000,38000,90000,500000,20.0,45,28.0,2,8000,Poor - High Emissions
+C017,Fashion Forward Group,Consumer Discretionary,4000,15000,4000,60000,55.0,82,13.2,50,250,Good
+C018,Chemical Processors,Chemicals,7500,32000,45000,200000,26.5,58,19.0,8,4000,Good
+C019,Utilities & Infrastructure,Utilities,10000,42000,35000,280000,30.0,68,10.5,40,1500,Good
+C020,BioTech Innovations,Healthcare,3800,18000,1500,55000,47.0,90,8.5,85,70,Good
+C021,Tech Solutions Inc.,Technology,9800,42000,12000,180000,37.0,82,11.8,50,450,Good
+C022,Trans Global Freight,Logistics,7500,30000,60000,160000,29.5,58,19.5,12,2800,Good
+C023,Solar Power Corp.,Energy,2800,10000,1500,45000,45.0,92,7.5,95,80,Good
+C024,Food & Beverage Co.,Consumer Staples,15000,70000,28000,280000,39.5,72,14.0,32,1700,Good
+C025,MediCare Holdings,Healthcare,7200,28000,7500,110000,46.5,86,8.8,65,320,Good
+C026,InvestPro Group,Finance,8800,38000,4500,48000,33.5,76,10.5,28,75,Good
+C027,Aerospace Mfg.,Industrials,14000,58000,70000,380000,26.0,52,21.0,11,4800,Good
+C028,FarmFresh Produce,Agriculture,4200,19000,9000,240000,38.0,66,16.0,22,1100,Good
+C029,Cruise Line Ltd.,Hospitality,1800,9000,6500,75000,41.0,81,24.0,38,380,Good
+C030,Data Cloud Systems,Technology,5500,26000,2000,38000,41.0,89,9.5,78,70,Good
+C031,Electric Vehicle Co.,Automotive,10500,43000,55000,330000,28.0,66,16.5,21,2900,Good
+C032,Fashion Retailers,Retail,6500,29000,11000,170000,32.0,71,13.8,37,850,Good
+C033,Biotech Innovators,Healthcare,5800,23000,2800,68000,49.0,93,7.0,72,140,Good
+C034,Infrastructure Builders,Construction,12500,53000,78000,430000,23.0,56,19.5,6,5800,Good
+C035,CyberSecure Corp.,Technology,6200,27000,2200,39000,42.0,87,9.6,76,75,Good
+C036,Metals & Alloys Inc.,Mining,8500,37000,85000,480000,21.0,46,27.0,3,7800,Good
+C037,Sportswear Brand,Consumer Discretionary,3800,14000,3800,58000,56.0,83,12.8,52,240,Good
+C038,Specialty Chemicals,Chemicals,7000,31000,42000,190000,27.0,59,18.5,9,3800,Good
+C039,Power Grid Co.,Utilities,9500,41000,33000,270000,31.0,69,10.0,42,1400,Good
+C040,Precision Health Co.,Healthcare,3500,17000,1400,53000,48.0,91,8.0,88,65,Good
+C041,Consumer Packaged Goods,Consumer Staples,16000,72000,29000,290000,39.0,71,15.0,31,1750,Good
+C042,Global Tech Solutions,Technology,10500,48000,14000,210000,36.0,81,12.0,48,480,Good
+C043,Transport Logistics,Logistics,9200,36000,58000,155000,28.8,61,18.8,14,2600,Good
+C044,Clean Energy Developers,Energy,3000,11000,1800,48000,43.0,91,7.8,92,90,Good
+C045,ElderCare Services,Healthcare,6900,26000,7800,105000,45.5,84,9.0,62,310,Good
+C046,Financial Holdings Inc.,Finance,9200,39000,4800,52000,33.0,74,10.8,26,85,Good
+C047,Industrial Machinery,Industrials,14500,62000,72000,410000,25.5,51,21.5,10,5200,Good
+C048,Organic Foods Co.,Agriculture,4800,21000,11000,260000,37.5,64,17.0,21,1300,Good
+C049,Resort & Spa Group,Hospitality,2200,11000,7200,82000,41.5,79,25.5,36,410,Good
+C050,AI Innovations Ltd.,Technology,6500,30000,2800,42000,43.0,90,10.2,77,85,Good
